@@ -1,6 +1,6 @@
 {
   "name": "empty-project-template",
-  "main": "./src/main.js",
+  "main": "App.js",
   "private": true,
   "scripts": {
     "start": "expo start",
@@ -10,7 +10,27 @@
   },
   "dependencies": {
     "expo": "^29.0.0",
+    "jest": "^23.5.0",
     "react": "16.3.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-29.0.0.tar.gz"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-29.0.0.tar.gz",
+    "react-native-status-bar-height": "^2.0.0",
+    "react-navigation": "^2.11.2"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^@apis(.*)$": "<rootDir>/src/apis$1",
+      "^@screen(.*)$": "<rootDir>/src/screen$1",
+      "^@navigation(.*)$": "<rootDir>/src/navigation$1",
+      "^@models(.*)$": "<rootDir>/src/models$1",
+      "^@stores(.*)$": "<rootDir>/src/stores$1",
+      "^@utils(.*)$": "<rootDir>/src/utils$1",
+      "^@STRINGS(.*)$": "<rootDir>/src/STRINGS$1",
+      "^@assets(.*)$": "<rootDir>/src/assets$1",
+      "^@shared(.*)$": "<rootDir>/src/shared$1",
+      "^@app(.*)$": "<rootDir>/src/app$1",
+      "^@db(.*)$": "<rootDir>/src/db$1",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/assetsTransformer.js",
+      "\\.(css|less)$": "<rootDir>/test/assetsTransformer.js"
+    }
   }
 }
