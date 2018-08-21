@@ -9,6 +9,23 @@ import Settings from '../screens/Tab/Settings';
 import { IC_MASK, IC_ADD } from '../../utils/Icons';
 import { colors, statusBarHeight } from '../../utils/Styles';
 
+function dummy() {
+    let dummyData = [
+        { uid: 0, img: '', displayName: '임형관', statusMsg: 'hello' },
+        { uid: 1, img: '', displayName: '정동민', statusMsg: 'hello' },
+        { uid: 2, img: '', displayName: '강한규', statusMsg: 'hello' },
+        { uid: 3, img: '', displayName: '김성기', statusMsg: 'hello' },
+        { uid: 4, img: '', displayName: '김윤희', statusMsg: 'hello' },
+        { uid: 5, img: '', displayName: '이원지', statusMsg: 'hello' },
+    ]    
+   return dummyData.length;
+};
+
+function currnetUser() {
+    let me = {uid: 2, img: require('../../../assets/img/kanghangyu.png'), displayName: '강한규', statusMsg: 'hello' }
+    return me;
+}
+
 const Navigator = createMaterialTopTabNavigator({
     Friend: { screen: Friend },
     Message: { screen: Message },
@@ -18,14 +35,15 @@ const Navigator = createMaterialTopTabNavigator({
             tabBarVisible: true,
             tabBarLabel: ({ focused }) => {
                 const { routeName } = navigation.state;
+                //console.log(dummy());
                 switch (routeName) {
                     case 'Friend':
                         return <Text style={[styles.txt, { opacity: focused ? 1 : 0.8 }]}>
-                            {('FRIEND')}  <Text style={styles.txtSub}>24</Text>
+                            {('FRIEND')}  <Text style={styles.txtSub}>{dummy()}</Text>
                         </Text>;
                     case 'Message':
                         return <Text style={[styles.txt, { opacity: focused ? 1 : 0.8 }]}>
-                            {('MESSAGE')}  <Text style={styles.txtSub}>8</Text>
+                            {('MESSAGE')}  <Text style={styles.txtSub}>0</Text>
                         </Text>;
                     case 'Settings':
                         return <Text style={[styles.txt, { opacity: focused ? 1 : 0.8 }]}>
@@ -52,13 +70,13 @@ const Navigator = createMaterialTopTabNavigator({
 export default Navigator;
 
 export const MainTabNavigationOptions = ({navigation}) => ({
-    title: 'Talk Talk',
+    title: 'ROA Love Talk',
     headerLeft: 
       <TouchableOpacity
         activeOpacity={0.5}
-        onPress={() => navigation.navigate('Profile', { user: firebase.auth().currentUser })}
+        onPress={() => navigation.navigate('Profile', { user: currnetUser() })}
       >
-        <Image style={styles.imgHeaderLeft} source={IC_MASK}/>
+        <Image style={styles.imgHeaderLeft} source={currnetUser().img}/>
       </TouchableOpacity>,
     headerRight:
       <TouchableOpacity

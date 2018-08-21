@@ -1,17 +1,95 @@
 import React, { Component } from "react";
-import { 
+import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    FlatList
 } from "react-native";
+import ActionButton from 'react-native-action-button';
+import { Ionicons } from '@expo/vector-icons';
+
+import EmptyListItem from '../../Items/EmptyListItem';
+import ChatroomListItem from '../../Items/ChatroomListItem';
 
 class Message extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            messages: [
+                {
+                    id: 1,
+                    img: null,
+                    displayName: '김성기',
+                    msg: '어디까지 했어??',
+                    count: 6,
+                    date: new Date(),
+                },
+                {
+                    id: 2,
+                    img: null,
+                    displayName: '임형관',
+                    msg: '그게 아니지... ',
+                    count: 0,
+                    date: new Date(),
+                },
+            ],
+        }
+
+        const test = this.props.navigation.state.params;
+        console.log(test);
+
+
+    }
     render() {
         return (
             <View style={styles.container}>
-                <Text>Message</Text>
+                <FlatList
+                    style={{
+                        alignSelf: 'stretch',
+                    }}
+                    contentContainerStyle={
+                        this.state.messages.length === 0
+                            ? {
+                                flex: 1,
+                                alignSelf: 'stretch',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }
+                            : null
+                    }
+                    keyExtractor={(item, index) => index.toString()}
+                    data={this.state.messages}
+                    renderItem={this.renderItem}
+                    ListEmptyComponent={<EmptyListItem>{('NO_CONTENT')}</EmptyListItem>}
+                />
+                 <ActionButton buttonColor="rgba(231,76,60,1)">
+                    {/* <ActionButton.Item buttonColor='#9b59b6' title="Done" onPress={() => console.log("notes tapped!")}>
+                        <Icon name="md-done-all" style={styles.actionButtonIcon} />
+                        </ActionButton.Item> */}
+                    <ActionButton.Item buttonColor='#3498db' title="New" onPress={() => { this._onAddButtonClick(true) }}>
+                        <Ionicons name="md-create" style={styles.actionButtonIcon} />
+                    </ActionButton.Item>
+                </ActionButton>
             </View>
         );
+    }
+
+    _onAddButtonClick = () => {
+        this.props.navigation.navigate('SearchUser')
+    }
+
+    renderItem = ({ item }) => {
+        return (
+            <ChatroomListItem
+                item={item}
+                onPress={() => this.onItemClick(item.id)}
+            />
+        );
+    }
+
+    onItemClick = (itemId) => {
+        console.log(`onItemClick: ${itemId}`);
+        this.props.navigation.navigate('Chat', { chatId: itemId });
     }
 }
 export default Message;
@@ -19,7 +97,9 @@ export default Message;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'transparent',
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     }
 });
