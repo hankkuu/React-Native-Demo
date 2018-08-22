@@ -12,57 +12,43 @@ import {
 import UserListItem from '../../Items/UserListItem';
 import EmptyListItem from '../../Items/EmptyListItem';
 
-import { ratio, colors, statusBarHeight } from '../../../utils/Styles';
-import { IC_BACK, IC_SEARCH } from '../../../utils/Icons';
+import { colors } from '../../../utils/Styles';
+import { IC_SEARCH } from '../../../utils/Icons';
+
+import GLOBAL from '../../../utils/global';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
+const gobalUsers = []; 
 
 class SearchUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: []
+            users: [],
+            searchTxt: '',
+            scrollY: new Animated.Value(0),
         }        
     }
 
     static navigationOptions = {
         title: 'SEARCH USER'
     }
+    
     componentDidMount() {
-        console.log('componentDidMount', 'SearchUser');
-        let users = []; //await db_getAllUser();
-        // 여기서 셋팅을 해줘야 하는데.... 
-        users = [
-            { uid: 0, img: require('./../../../../assets/img/imhyunggwan.png'), displayName: '임형관', statusMsg: 'hello', isFriend: true  },
-            { uid: 1, img: require('./../../../../assets/img/jungdongmin.png'), displayName: '정동민', statusMsg: 'hello', isFriend: true },
-            { uid: 2, img: require('./../../../../assets/img/kanghangyu.png'), displayName: '강한규', statusMsg: 'hello', isFriend: true },
-            { uid: 3, img: require('./../../../../assets/img/kimsungki.png'), displayName: '김성기', statusMsg: 'hello', isFriend: true },
-            { uid: 4, img: require('./../../../../assets/img/kimyoonhee.png'), displayName: '김윤희', statusMsg: 'hello', isFriend: true },
-            { uid: 5, img: require('./../../../../assets/img/leewonji.png'), displayName: '이원지', statusMsg: 'hello', isFriend: true },
-            { uid: 6, img: require('./../../../../assets/img/dongyoung.png'), displayName: '이동룡', statusMsg: 'hello', isFriend: false },
-            { uid: 7, img: require('./../../../../assets/img/insu.png'), displayName: '정인수', statusMsg: 'hello', isFriend: false },
-            { uid: 8, img: require('./../../../../assets/img/jayoon.png'), displayName: '정재윤', statusMsg: 'hello', isFriend: false },
-            { uid: 9, img: require('./../../../../assets/img/kyuho.png'), displayName: '정규호', statusMsg: 'hello', isFriend: false },
-            { uid: 10, img: require('./../../../../assets/img/kyungwon.png'), displayName: '박경원', statusMsg: 'hello', isFriend: false },
-            { uid: 11, img: require('./../../../../assets/img/myungho.png'), displayName: '이명호', statusMsg: 'hello', isFriend: false },
-            { uid: 12, img: require('./../../../../assets/img/myunghwan.png'), displayName: '안명환', statusMsg: 'hello', isFriend: false },
-            { uid: 13, img: require('./../../../../assets/img/yoonkwan.png'), displayName: '이윤관', statusMsg: 'hello', isFriend: false },
-            { uid: 14, img: require('./../../../../assets/img/youngtak.png'), displayName: '오용택', statusMsg: 'hello', isFriend: false },
-        ]
-
-        this.setState({ users: users });
+        //console.log('componentDidMount', 'SearchUser');
+         // 여기서 셋팅을 해줘야 하는데.... 
+        //console.log(global.users);
+        gobalUsers = global.users;
+        this.setState({ users: global.users });
     }
     render() {
-        let searchTxt = '';
-        let scrollY = new Animated.Value(0);
-        //let users = [];
 
         return (
             <View style={styles.container}>
                 <Animated.View style={[styles.viewSearch,
                 {
                     height: 50, transform: [{
-                        translateY: scrollY.interpolate({
+                        translateY: this.state.scrollY.interpolate({
                             inputRange: [-50, 0, 50, 100],
                             outputRange: [0, 0, -50, -50],
                         })
@@ -70,7 +56,7 @@ class SearchUser extends Component {
                 }]}>
                     <Animated.View style={{
                         position: 'absolute', width: '100%', paddingHorizontal: 20, height: 50,
-                        opacity: scrollY.interpolate({
+                        opacity: this.state.scrollY.interpolate({
                             inputRange: [-50, 0, 50, 100],
                             outputRange: [1, 1, 0, 0],
                         })
@@ -81,13 +67,12 @@ class SearchUser extends Component {
                             autoCapitalize='none'
                             autoCorrect={false}
                             multiline={false}
-                            // value={this.searchTxt}
                             style={{
                                 width: '100%', height: 30, top: 10, backgroundColor: 'white',
                                 borderRadius: 4, paddingLeft: 34, paddingRight: 10
                             }}
                             onSubmitEditing={this.onSearch}
-                            defaultValue={this.searchTxt}
+                            defaultValue={this.state.searchTxt}
                         />
                         <Image source={IC_SEARCH} style={styles.imgSearch} />
                     </Animated.View>
@@ -96,13 +81,14 @@ class SearchUser extends Component {
                     style={{
                         width: '100%', height: '100%', marginBottom: -50,
                         transform: [{
-                            translateY: scrollY.interpolate({
+                            translateY: this.state.scrollY.interpolate({
                                 inputRange: [-50, 0, 50, 100],
                                 outputRange: [0, 0, -50, -50],
                             })
                         }],
                     }}
-                    contentContainerStyle={                        
+                    contentContainerStyle={       
+                        // content와 관련된 style을 아래와 같이 할 수있다.. 사실 가운데 정렬 이라고 밖에...                  
                         this.state.users.length === 0
                              ? {
                                  flex: 1,
@@ -117,7 +103,7 @@ class SearchUser extends Component {
                     ListEmptyComponent={<EmptyListItem>{('NO_CONTENT')}</EmptyListItem>}
 
                     onScroll={Animated.event(
-                        [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                        [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
                         { useNativeDriver: true, listener: this.onScroll },
                     )}
                 />
@@ -126,7 +112,7 @@ class SearchUser extends Component {
     }
 
     onScroll = (e) => {
-        // console.log(e.nativeEvent.contentOffset.y);
+        //console.log(e.nativeEvent.contentOffset.y);
     }
 
     renderItem = ({ item }) => {
@@ -143,17 +129,27 @@ class SearchUser extends Component {
         this.props.navigation.navigate('Profile', { user: item });
     }
 
-    onTxtChanged = (txt) => {
-        this.searchTxt = txt;
+    // async ~ await 패턴을 사용했다 왜냐하면 setState가 완전히 변경이 안되었는데 onSerch()가 호출되어 문자열 비교의 불일치가 일어났다 
+    // await는 이런 점을 보완해준다 즉 단어 그대로 기다리는 것이다 그리고 await를 사용하면 async를 사용하는 패턴으로 코딩해야 에러가 나지 않는다 
+    onTxtChanged = async (txt) => {
+        //console.log(txt);
+        await this.setState({
+            searchTxt: txt
+        });
+        // 아래와 같은 식으로 state를 건르리지 않는다.
+        //this.state.searchTxt = txt;
         this.onSearch();
     }
 
     onSearch = () => {
-        console.log('onSearch: ' + this.searchTxt);
-        if (this.searchTxt === '') {
-            this.setState({ users: this.state.users });
+        const { users, searchTxt } = this.state;
+        //console.log('onSearch: ' + searchTxt);        
+        if (searchTxt === '') {
+            //console.log("전체가 보여야 한다"); // 임시로 전체를 이렇게 가져와야 할것 같다.. state 배열이 비어 있다.
+            // 아래에서 상태를변경시켜 놔서 맨 처음것으로 다시 덮어써야 한다 
+            this.setState({ users: gobalUsers });
         } else {
-            this.setState({ users: this.state.users.filter((item) => item.displayName.includes(this.searchTxt)) });
+            this.setState({ users: users.filter((item) => item.displayName.includes(this.state.searchTxt)) });
         }
     }
 

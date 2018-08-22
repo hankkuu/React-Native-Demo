@@ -25,7 +25,7 @@ class Settings extends Component {
     }
 
     onLogout = () => {
-        this.props.navigation.navigate('Login');
+        this.props.navigation.navigate('Loading');
       }
 }
 export default Settings;
@@ -51,10 +51,9 @@ const styles = StyleSheet.create({
         },
         shadowRadius: 4,
         shadowOpacity: 0.3,
-
         alignItems: 'center',
         justifyContent: 'center',
-        left: 20, top: 20,
+        marginTop: 10,
     },
     txtUpdate: {
         fontSize: 16,

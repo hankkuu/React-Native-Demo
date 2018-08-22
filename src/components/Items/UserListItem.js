@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import { IC_MASK } from '../../utils/Icons';
-import { ratio, colors, screenWidth } from '../../utils/Styles';
+import { colors } from '../../utils/Styles';
 
 class UserListItem extends Component {
     // // 이렇게도 할수는 있다... 
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         backgroundColor: 'white',
-        height: 80 * ratio,
+        height: 80 ,
         borderBottomWidth: 1,
         borderColor: 'rgb(247,248,251)',
 
@@ -57,24 +57,24 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     img: {
-        marginHorizontal: 20 * ratio,
-        width: 40 * ratio,
-        height: 40 * ratio,
+        marginHorizontal: 20 ,
+        width: 40 ,
+        height: 40 ,
     },
     txt: {
-        width: 100 * ratio,
-        fontSize: 14 * ratio,
+        width: 100 ,
+        fontSize: 14 ,
         color: colors.dusk,
     },
     txtRight: {
         position: 'absolute',
-        right: 20 * ratio,
-        fontSize: 12 * ratio,
+        right: 20 ,
+        fontSize: 12 ,
         color: colors.dusk,
-        maxWidth: 134.2 * ratio,
+        maxWidth: 134.2 ,
         borderWidth: 1,
         borderColor: colors.paleGray,
-        paddingHorizontal: 8 * ratio,
-        paddingVertical: 4 * ratio,
+        paddingHorizontal: 8 ,
+        paddingVertical: 4 ,
     },
 });

@@ -7,13 +7,9 @@ import {
     Alert
 } from "react-native";
 
-import { ratio, colors } from '../../../utils/Styles';
-import { IC_BACK } from '../../../utils/Icons';
-
+import { colors } from '../../../utils/Styles';
 import TextInput from '../../shared/TextInput';
 import Button from '../../shared/Button';
-import StatusBar from '../../shared/StatusBar';
-
 
 class SignupScreen extends Component {
     constructor(props) {
@@ -33,21 +29,20 @@ class SignupScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <StatusBar isDarkContent={false} />
                 <ScrollView
                     style={styles.scrollView}
-                    contentContainerStyle={styles.scrollViewContainer}
+                    contentContainerStyle={styles.scrollViewContainer} // 정렬용
                 >
                     <View style={styles.wrapper}>
                         <TextInput
-                            style={{ marginTop: 8 * ratio }}
+                            style={{ marginTop: 8  }}
                             txtLabel={('EMAIL')}
                             txtHint={('EMAIL')}
                             txt={this.state.email}
                             onTextChanged={(text) => this.onTextChanged('EMAIL', text)}
                         />
                         <TextInput
-                            style={{ marginTop: 24 * ratio }}
+                            style={{ marginTop: 24  }}
                             txtLabel={('PASSWORD')}
                             txtHint={('PASSWORD')}
                             txt={this.state.pw}
@@ -55,16 +50,16 @@ class SignupScreen extends Component {
                             isPassword={true}
                         />
                         <TextInput
-                            style={{ marginTop: 24 * ratio }}
+                            style={{ marginTop: 24  }}
                             txtLabel={('NAME')}
                             txtHint={('NAME')}
                             txt={this.state.displayName}
                             onTextChanged={(text) => this.onTextChanged('NAME', text)}
                         />
                         <TextInput
-                            style={{ marginTop: 24 * ratio }}
-                            txtLabel={('STATUS_MSG')}
-                            txtHint={('STATUS_MSG')}
+                            style={{ marginTop: 24  }}
+                            txtLabel={('STATUS MSG')}
+                            txtHint={('STATUS MSG')}
                             txt={this.state.statusMsg}
                             onTextChanged={(text) => this.onTextChanged('STATUS_MSG', text)}
                         />
@@ -75,6 +70,12 @@ class SignupScreen extends Component {
                                 style={styles.btnRegister}
                                 textStyle={styles.txtRegister}
                             >{('REGISTER')}</Button>
+                            <Button
+                                isLoading={this.state.isRegistering}
+                                onPress={this.onRegisterFacebook}
+                                style={styles.btnRegister}
+                                textStyle={styles.txtRegister}
+                            >{('FACE BOOK')}</Button>
                         </View>
                     </View>
                 </ScrollView>
@@ -83,15 +84,29 @@ class SignupScreen extends Component {
     }
 
     onRegister = () => {
-        this.setState({ isRegistering: true }, async () => {
+        this.setState({ isRegistering: true }, () => {
             try {
+
+                // 지금 하는게 없다...
                 
             } catch (err) {
                 this.setState({ isRegistering: false });
                 Alert.alert(getString('ERROR'), err.message);
             }
         });
+    }
 
+    onRegisterFacebook = () => {
+        this.setState({ isRegistering: true }, () => {
+            try {
+
+                // 지금 하는게 없다...
+                
+            } catch (err) {
+                this.setState({ isRegistering: false });
+                Alert.alert(getString('ERROR'), err.message);
+            }
+        });
     }
 
     onTextChanged = (type, text) => {
@@ -128,7 +143,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     wrapper: {
-        marginTop: 40 * ratio,
+        marginTop: 40 ,
         width: '78%',
 
         flexDirection: 'column',
@@ -136,31 +151,33 @@ const styles = StyleSheet.create({
     },
     btnWrapper: {
         width: '100%',
-        alignItems: 'flex-end',
+        flexDirection: 'row',
+        justifyContent: "space-around"
+        //alignItems: 'flex-end',
     },
     btnRegister: {
         backgroundColor: colors.dodgerBlue,
         borderColor: colors.dodgerBlue,
-        borderRadius: 4 * ratio,
-        borderWidth: 1 * ratio,
-        width: 136 * ratio,
-        height: 60 * ratio,
-        marginLeft: 4 * ratio,
-        marginTop: 24 * ratio,
-        marginBottom: 48 * ratio,
+        borderRadius: 4 ,
+        borderWidth: 1 ,
+        width: 136 ,
+        height: 60 ,
+        marginLeft: 4 ,
+        marginTop: 24 ,
+        marginBottom: 48 ,
         shadowColor: colors.dodgerBlue,
         shadowOffset: {
             width: 0,
-            height: 10 * ratio,
+            height: 10 ,
         },
-        shadowRadius: 4 * ratio,
+        shadowRadius: 4 ,
         shadowOpacity: 0.3,
 
         alignItems: 'center',
         justifyContent: 'center',
     },
     txtRegister: {
-        fontSize: 16 * ratio,
+        fontSize: 16 ,
         fontWeight: 'bold',
         color: 'white',
     },

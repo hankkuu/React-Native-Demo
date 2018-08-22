@@ -20,21 +20,7 @@
     "react-native-status-bar-height": "^2.0.0",
     "react-navigation": "^2.11.2"
   },
-  "jest": {
-    "moduleNameMapper": {
-      "^@apis(.*)$": "<rootDir>/src/apis$1",
-      "^@screen(.*)$": "<rootDir>/src/screen$1",
-      "^@navigation(.*)$": "<rootDir>/src/navigation$1",
-      "^@models(.*)$": "<rootDir>/src/models$1",
-      "^@stores(.*)$": "<rootDir>/src/stores$1",
-      "^@utils(.*)$": "<rootDir>/src/utils$1",
-      "^@STRINGS(.*)$": "<rootDir>/src/STRINGS$1",
-      "^@assets(.*)$": "<rootDir>/src/assets$1",
-      "^@shared(.*)$": "<rootDir>/src/shared$1",
-      "^@app(.*)$": "<rootDir>/src/app$1",
-      "^@db(.*)$": "<rootDir>/src/db$1",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/assetsTransformer.js",
-      "\\.(css|less)$": "<rootDir>/test/assetsTransformer.js"
-    }
+  "devDependencies": {
+    "babel-plugin-module-resolver": "^3.1.1"
   }
 }

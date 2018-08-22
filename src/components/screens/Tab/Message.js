@@ -18,7 +18,7 @@ class Message extends Component {
             messages: [
                 {
                     id: 1,
-                    img: null,
+                    img: require('../../../../assets/img/kimsungki.png'),
                     displayName: '김성기',
                     msg: '어디까지 했어??',
                     count: 6,
@@ -26,17 +26,17 @@ class Message extends Component {
                 },
                 {
                     id: 2,
-                    img: null,
+                    img: require('../../../../assets/img/imhyunggwan.png'),
                     displayName: '임형관',
                     msg: '그게 아니지... ',
-                    count: 0,
+                    count: 1,
                     date: new Date(),
                 },
             ],
         }
 
         const test = this.props.navigation.state.params;
-        console.log(test);
+        //console.log("test");
 
 
     }

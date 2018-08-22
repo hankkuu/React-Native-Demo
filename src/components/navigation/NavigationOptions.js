@@ -10,16 +10,16 @@ export const commonNavigationOptions = {
   headerBackTitle: null,
   headerStyle: {
     backgroundColor: colors.dodgerBlue, 
-    borderBottomColor: 'transparent', 
-    borderBottomWidth: 0, 
+    borderBottomColor: 'red', 
+    borderBottomWidth: 1, 
     elevation: 0,
   },
-  headerTitleStyle: {color: 'white'},
-  headerTintColor: 'white', 
+  headerTitleStyle: { color: 'yellow'},
+  headerTintColor: 'red', 
 };
 
-export const DismissButton = ({navigation, style}) => (
-  <TouchableOpacity style={[{width: 24, height: 24, left: 14}, style]} onPress={() => navigation.dismiss()}>
+const DismissButton = ({navigation, style}) => (
+  <TouchableOpacity style={[{width: 24, height: 24, left: 14, marginRight: 20}, style]} onPress={() => navigation.dismiss()}>
     <Image 
       style={{width: '100%', height: '100%', tintColor: 'white'}} 
       source={IC_DISMISS}/>

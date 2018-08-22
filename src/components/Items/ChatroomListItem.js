@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import moment from 'moment';
 import { IC_MASK } from '../../utils/Icons';
-import { ratio, colors, screenWidth } from '../../utils/Styles';
+import { colors } from '../../utils/Styles';
 
 class ChatroomListItem extends Component {
 
@@ -36,6 +36,7 @@ class ChatroomListItem extends Component {
             </View>
         );
     }
+    
     renderCount = () => {
         if (this.props.item.count) {
             return (
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         backgroundColor: 'white',
-        height: 80 * ratio,
+        height: 80 ,
         borderBottomWidth: 1,
         borderColor: 'rgb(247,248,251)',
 
@@ -64,14 +65,14 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     img: {
-        marginHorizontal: 20 * ratio,
-        width: 40 * ratio,
-        height: 40 * ratio,
+        marginHorizontal: 20 ,
+        width: 40 ,
+        height: 40 ,
     },
     viewContent: {
         flexDirection: 'column',
         flex: 1,
-        paddingRight: 20 * ratio,
+        paddingRight: 20 ,
     },
     viewTop: {
         flexDirection: 'row',
@@ -79,35 +80,35 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     txtDisplayName: {
-        fontSize: 14 * ratio,
+        fontSize: 14 ,
         color: colors.dusk,
     },
     viewCount: {
-        width: 16 * ratio,
-        height: 16 * ratio,
-        borderRadius: 8 * ratio,
+        width: 16 ,
+        height: 16 ,
+        borderRadius: 8 ,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgb(80,227,194)',
     },
     txtCount: {
-        fontSize: 10 * ratio,
+        fontSize: 10 ,
         color: 'white',
     },
     viewBottom: {
-        marginTop: 8 * ratio,
+        marginTop: 8 ,
 
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
     },
     txtMsg: {
-        fontSize: 12 * ratio,
+        fontSize: 12 ,
         color: colors.dusk,
-        maxWidth: 150 * ratio,
+        maxWidth: 150 ,
     },
     txtDate: {
-        fontSize: 12 * ratio,
+        fontSize: 12 ,
         color: colors.blueyGray,
         textAlign: 'right',
     },

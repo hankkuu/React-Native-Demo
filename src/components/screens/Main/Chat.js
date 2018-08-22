@@ -11,14 +11,15 @@ import {
     TextInput
 } from "react-native";
 
-import { IC_BACK, IC_SMILE } from '../../../utils/Icons';
-
-import { ratio, colors, statusBarHeight } from '../../../utils/Styles';
+import { IC_SMILE } from '../../../utils/Icons';
+import { colors } from '../../../utils/Styles';
 
 import Button from '../../shared/Button';
 //import TextInput from '../../shared/TextInput';
 import ChatListItem from '../../Items/ChatListItem';
 import EmptyListItem from '../../Items/EmptyListItem';
+
+const keyboardDidShowListener = null;
 
 class Chat extends Component {
     constructor(props) {
@@ -52,70 +53,61 @@ class Chat extends Component {
         title: 'CHAT'
     }
 
-
     componentDidMount() {
-        this.state.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', (e) => this._keyboardDidShow(e));
+        this.state.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', (e) => this.keyboardDidShow(e));
     }
     componentWillUnmount() {
         this.state.keyboardDidShowListener.remove();
     }
 
     render() {
-        const { user } = this.props.navigation.state.params;
-        console.log(user);
+        //const { user } = this.props.navigation.state.params;
+        //console.log("user");
         return (
             <View style={styles.container}>
-                <KeyboardAvoidingView
-                    behavior='padding'
-                    style={styles.content}
-                >
-                    <FlatList
-                        style={{
-                            alignSelf: 'stretch',
-                        }}
-                        contentContainerStyle={
-                            this.state.chats.length === 0
-                                ? {
-                                    flex: 1,
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                }
-                                : null
-                        }
-                        keyExtractor={(item, index) => index.toString()}
-                        data={this.state.chats}
-                        renderItem={this.renderItem}
-                        ListEmptyComponent={<EmptyListItem>{('NO_CONTENT')}</EmptyListItem>}
-                    />
-                    {
-                        !this.state.showMenu
-                            ? <View
-                                style={styles.viewChat}
-                            >
-                                <TextInput
-                                    style={styles.inputChat}
-                                    placeholder={('WRITE_MESSAGE')}
-                                    placeholderTextColor={colors.cloudyBlue}
-                                />
-                                <TouchableOpacity
-                                    style={styles.touchMenu}
-                                    onPress={this.showMenu}
-                                >
-                                    <Image style={styles.imgMenu} source={IC_SMILE} />
-                                </TouchableOpacity>
-                                <Button
-                                    isLoading={this.state.isLoading}
-                                    onPress={this.sendChat}
-                                    style={styles.btnSend}
-                                    textStyle={styles.txtSend}
-                                >{('SEND')}</Button>
-                            </View>
+
+                <FlatList
+                    style={{
+                        alignSelf: 'stretch',
+                    }}
+                    contentContainerStyle={
+                        this.state.chats.length === 0
+                            ? {
+                                flex: 1,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }
                             : null
                     }
-                </KeyboardAvoidingView>
+                    keyExtractor={(item, index) => index.toString()}
+                    data={this.state.chats}
+                    renderItem={this.renderItem}
+                    ListEmptyComponent={<EmptyListItem>{('NO_CONTENT')}</EmptyListItem>}
+                />
                 {
-                    this.state.showMenu
-                        ? <View style={styles.viewBottom}>
+                    !this.state.showMenu
+                        ? <View
+                            style={styles.viewChat}
+                        >
+                            <TextInput
+                                style={styles.inputChat}
+                                placeholder={('WRITE_MESSAGE')}
+                                placeholderTextColor={colors.cloudyBlue}
+                            />
+                            <TouchableOpacity
+                                style={styles.touchMenu}
+                                onPress={this.showMenu}
+                            >
+                                <Image style={styles.imgMenu} source={IC_SMILE} />
+                            </TouchableOpacity>
+                            <Button
+                                isLoading={this.state.isLoading}
+                                onPress={this.sendChat}
+                                style={styles.btnSend}
+                                textStyle={styles.txtSend}
+                            >{('SEND')}</Button>
+                        </View>
+                        : <View style={styles.viewBottom}>
                             <View style={styles.viewChat}>
                                 <TextInput
                                     style={styles.inputChat}
@@ -136,25 +128,27 @@ class Chat extends Component {
                                     textStyle={styles.txtSend}
                                 >{('SEND')}</Button>
                             </View>
-                            <View style={styles.viewMenu} />
+                            <View style={styles.viewMenu}>
+                                <Text>여기에 사진을 불러와서 사진 첨부를 하자</Text>
+                            </View>
                         </View>
-                        : null
                 }
             </View>
         );
     }
 
-    onTextChanged = text => {
+    onTextChanged = (text) => {
         this.setState({
             msg: text
         });
     }
 
-    _keyboardDidShow(e) {
+    keyboardDidShow(e) {
         console.log('keyboardHeight', e.endCoordinates.height);
     }
 
     renderItem = ({ item }) => {
+        //console.log(item)
         return (
             <ChatListItem
                 item={item}
@@ -196,15 +190,11 @@ class Chat extends Component {
     }
 
     showMenu = () => {
-        console.log('showMenu');
-        Keyboard.dismiss();
+        //console.log('showMenu');
+        //Keyboard.dismiss();
         this.setState({
             showMenu: !this.state.showMenu,
         });
-    }
-
-    goBack = () => {
-        this.props.navigation.goBack();
     }
 }
 export default Chat;
@@ -228,7 +218,7 @@ const styles = StyleSheet.create({
         width: '100%',
         borderTopWidth: 1,
         borderColor: colors.paleGray,
-        height: 52 * ratio,
+        height: 52,
 
         flexDirection: 'row',
         justifyContent: 'flex-end',
@@ -236,37 +226,39 @@ const styles = StyleSheet.create({
     },
     inputChat: {
         width: '80%',
-        //fontSize: 14 * ratio,
-        marginRight: 20 * ratio,
-        paddingLeft: 48 * ratio,
+        //fontSize: 14 ,
+        marginRight: 20,
+        paddingLeft: 48,
     },
     touchMenu: {
         position: 'absolute',
         left: 10,
         height: '100%',
-        minWidth: 20 * ratio,
+        minWidth: 20,
         justifyContent: 'center',
     },
     imgMenu: {
-        width: 20 * ratio,
-        height: 20 * ratio,
+        width: 20,
+        height: 20,
     },
     btnSend: {
-        right: 8 * ratio,
+        left: 8,
+        right: 8,
         backgroundColor: colors.dodgerBlue,
-        borderRadius: 4 * ratio,
-        width: 60 * ratio,
-        height: 36 * ratio,
+        borderRadius: 4,
+        width: 60,
+        height: 36,
+        marginRight: 10,
 
         alignItems: 'center',
         justifyContent: 'center',
     },
     txtSend: {
-        fontSize: 14 * ratio,
+        fontSize: 14,
         fontWeight: 'bold',
         color: 'white',
-        paddingHorizontal: 5 * ratio,
-        paddingVertical: 10 * ratio,
+        paddingHorizontal: 5,
+        paddingVertical: 10,
     },
     viewBottom: {
         position: 'absolute',
