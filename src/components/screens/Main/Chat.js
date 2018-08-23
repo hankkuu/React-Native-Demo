@@ -91,7 +91,7 @@ class Chat extends Component {
                         >
                             <TextInput
                                 style={styles.inputChat}
-                                placeholder={('WRITE_MESSAGE')}
+                                placeholder={('WRITE MESSAGE')}
                                 placeholderTextColor={colors.cloudyBlue}
                             />
                             <TouchableOpacity
@@ -111,7 +111,7 @@ class Chat extends Component {
                             <View style={styles.viewChat}>
                                 <TextInput
                                     style={styles.inputChat}
-                                    placeholder={('WRITE_MESSAGE')}
+                                    placeholder={('WRITE MESSAGE')}
                                     placeholderTextColor={colors.cloudyBlue}
                                     onChangeText={this.onTextChanged}
                                 />
@@ -144,7 +144,7 @@ class Chat extends Component {
     }
 
     keyboardDidShow(e) {
-        console.log('keyboardHeight', e.endCoordinates.height);
+        //console.log('keyboardHeight', e.endCoordinates.height);
     }
 
     renderItem = ({ item }) => {

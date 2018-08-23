@@ -38,11 +38,11 @@ class Friend extends Component {
         })    
     }
 
-    componentDidMount() {
-        const { navigation } = this.props;
-        const test = navigation.state.params;
-        //console.log(test);
-    }
+    // componentDidMount() {
+    //     const { navigation } = this.props;
+    //     const test = navigation.state.params;
+    //     //console.log(test);
+    // }
 
 
     render() {
@@ -51,7 +51,19 @@ class Friend extends Component {
         const test = navigation.state.params;
         if (test !== undefined) {
             const { friends } = this.state;
-            friends.push(test.user);
+            if( test.isUpdating === true && test.user.isMe === true ) {
+                console.log(test.user);
+                let n = friends.indexOf(test.user);
+                friends[n] = test.user;
+            } else {
+                if(test.isFriend === true) {
+                    friends.push(test.user);
+                } else {
+                    let n = friends.indexOf(test.user);
+                    friends.splice(n,1);
+                    //console.log(n);
+                }
+            }                        
         }
 
         return (
@@ -138,7 +150,7 @@ class Friend extends Component {
     }
 
     renderItem = ({ item, index }) => {
-        console.log(item);
+        //console.log(item);
         const listItem =
             <UserListItem
                 item={item}

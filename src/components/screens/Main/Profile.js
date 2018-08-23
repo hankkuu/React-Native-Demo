@@ -125,11 +125,14 @@ class Profile extends Component {
 
     onUpdate = () => {
         console.log('onUpdate');
+        const { user } = this.props.navigation.state.params;
+        const { displayName, statusMsg } = this.state;
         this.setState({ isUpdating: true }, () => {
             try {
-                // 현재 업데이트 하기가 어렵다.. 아래 방식으로 구현                
-
-                this.props.navigation.goBack();
+                // 현재 업데이트 하려면......              
+                user.displayName = displayName;
+                user.statusMsg = statusMsg;
+                this.props.navigation.navigate("Friend", { user: user, isUpdating: true});
             } catch (err) {
                 this.setState({ isUpdating: false });
             }
@@ -146,13 +149,10 @@ class Profile extends Component {
 
     onRemoveFriend = () => {
         const { user } = this.props.navigation.state.params;
+        user.isFriend = false;
         //db_unfriend(user.uid);
-        this.setState({},
-            () => {
-                this.props.navigation.navigate("Message", { user: user });
-            }
-        )
-
+        this.props.navigation.navigate("Friend", { user: user });
+        
     }
 
     onChatFriend = () => {
