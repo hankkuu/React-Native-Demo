@@ -8,8 +8,8 @@ import {
 import ActionButton from 'react-native-action-button';
 import { Ionicons } from '@expo/vector-icons';
 
-import EmptyListItem from '../../Items/EmptyListItem';
-import ChatroomListItem from '../../Items/ChatroomListItem';
+import EmptyListItem from '../../items/EmptyListItem';
+import ChatroomListItem from '../../items/ChatroomListItem';
 
 class Message extends Component {
     constructor(props) {
@@ -20,7 +20,7 @@ class Message extends Component {
                     id: 1,
                     img: require('../../../../assets/img/kimsungki.png'),
                     displayName: '김성기',
-                    msg: '어디까지 했어??',
+                    msg: '내일 출근 하세요',
                     count: 6,
                     date: new Date(),
                 },
@@ -28,7 +28,7 @@ class Message extends Component {
                     id: 2,
                     img: require('../../../../assets/img/imhyunggwan.png'),
                     displayName: '임형관',
-                    msg: '그게 아니지... ',
+                    msg: '내일 쉬겠습니다 ',
                     count: 1,
                     date: new Date(),
                 },

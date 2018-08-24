@@ -1,5 +1,5 @@
 import Expo from 'expo';
-import App from './src/main';
+import App from './src/Main';
 
 Expo.registerRootComponent(App);
 // export default App; 

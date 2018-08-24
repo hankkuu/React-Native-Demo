@@ -9,8 +9,8 @@ import {
     Animated
 } from "react-native";
 
-import UserListItem from '../../Items/UserListItem';
-import EmptyListItem from '../../Items/EmptyListItem';
+import UserListItem from '../../items/UserListItem';
+import EmptyListItem from '../../items/EmptyListItem';
 
 import { colors } from '../../../utils/Styles';
 import { IC_SEARCH } from '../../../utils/Icons';

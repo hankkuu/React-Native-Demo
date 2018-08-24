@@ -18,7 +18,20 @@ class UserListItem extends Component {
     // // 사용할때는 아래와 같이 
     //   <View style={this.props.style}>
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: props.item.displayName,
+        }
+    }
+
+    componentDidUpdate() {
+        console.log("componentDidUpdate - user List");
+        //console.log(this.state.name);
+    }
+
     render() {
+        //console.log(this.state.name);
         return (
             <View style={styles.container}>
                 <TouchableOpacity

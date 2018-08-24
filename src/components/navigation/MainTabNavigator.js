@@ -3,9 +3,9 @@ import { Platform, Image, Text, TouchableOpacity, StyleSheet } from 'react-nativ
 
 import { createMaterialTopTabNavigator } from 'react-navigation';
 
-import Friend from '../screens/Tab/Friend';
-import Message from '../screens/Tab/Message';
-import Settings from '../screens/Tab/Settings';
+import Friend from '../screens/tab/Friend';
+import Message from '../screens/tab/Message';
+import Settings from '../screens/tab/Settings';
 
 import { IC_ADD } from '../../utils/Icons';
 import { colors, statusBarHeight } from '../../utils/Styles';

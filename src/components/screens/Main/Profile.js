@@ -23,7 +23,9 @@ class Profile extends Component {
         super(props);
 
         const { navigation } = props;
-        const { user } = navigation.state.params;
+        const { user, frieds } = navigation.state.params;
+
+        console.log(frieds);
 
         this.state = {
             isUpdating: false,
@@ -31,6 +33,7 @@ class Profile extends Component {
             statusMsg: user.statusMsg,
             img: user.img,
             isMe: user.isMe,  // 임시다.... 
+            thisFriends : frieds,
         }
     }
 
@@ -132,7 +135,7 @@ class Profile extends Component {
                 // 현재 업데이트 하려면......              
                 user.displayName = displayName;
                 user.statusMsg = statusMsg;
-                this.props.navigation.navigate("Friend", { user: user, isUpdating: true});
+                this.props.navigation.navigate("Friend", { user: user, work: 'update'});
             } catch (err) {
                 this.setState({ isUpdating: false });
             }
@@ -140,18 +143,23 @@ class Profile extends Component {
     }
 
     onAddFriend = () => {
-        const { user } = this.props.navigation.state.params;
-        user.isFriend = true;
-        //console.log(user);
+        const { data } = this.props.navigation.state.params;      
+        console.log(data); 
+        //console.log(friends);
         //db_addfriend(user.uid);
-        this.props.navigation.navigate("Friend", { user: user });
+        // isUpdating은 커스텀 버튼의 디자인 효과다...
+        this.setState({isUpdating: true}, () => {
+            user.isFriend = true;
+            this.props.navigation.navigate("Friend", { user: data, work: 'add' });
+        });        
     }
 
     onRemoveFriend = () => {
         const { user } = this.props.navigation.state.params;
-        user.isFriend = false;
+        
         //db_unfriend(user.uid);
-        this.props.navigation.navigate("Friend", { user: user });
+        user.isFriend = false;
+        this.props.navigation.navigate("Friend", { user: user, work: 'remove' });
         
     }
 
@@ -162,7 +170,7 @@ class Profile extends Component {
         this.props.navigation.navigate("Chat", user);
     }
 
-    onTextChanged = (type, text) => {
+    onTextChanged = (type, text) => {        
         switch (type) {
             case 'DISPLAY_NAME':
                 this.setState({ displayName: text });

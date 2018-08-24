@@ -16,8 +16,8 @@ import { colors } from '../../../utils/Styles';
 
 import Button from '../../shared/Button';
 //import TextInput from '../../shared/TextInput';
-import ChatListItem from '../../Items/ChatListItem';
-import EmptyListItem from '../../Items/EmptyListItem';
+import ChatListItem from '../../items/ChatListItem';
+import EmptyListItem from '../../items/EmptyListItem';
 
 const keyboardDidShowListener = null;
 

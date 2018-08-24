@@ -4,9 +4,9 @@ import StackViewStyleInterpolator from 'react-navigation/src/views/StackView/Sta
 
 import MainTabNavigator, { MainTabNavigationOptions } from './MainTabNavigator';
 
-import Profile from '../screens/Main/Profile';
-import SearchUser from '../screens/Main/SearchUser';
-import Chat from '../screens/Main/Chat';
+import Profile from '../screens/main/Profile';
+import SearchUser from '../screens/main/SearchUser';
+import Chat from '../screens/main/Chat';
 
 // MainTab을 포함하는 네비게이터 
 const routeConfig = {

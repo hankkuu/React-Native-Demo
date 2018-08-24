@@ -11,8 +11,8 @@ import { Ionicons } from '@expo/vector-icons';
 //import Swipeout from 'react-native-swipeout';
 import ActionSheet from 'react-native-actionsheet';
 
-import UserListItem from '../../Items/UserListItem';
-import EmptyListItem from '../../Items/EmptyListItem';
+import UserListItem from '../../items/UserListItem';
+import EmptyListItem from '../../items/EmptyListItem';
 
 class Friend extends Component {
     constructor(props) {
@@ -26,45 +26,65 @@ class Friend extends Component {
         const { navigation } = props;
         const test = navigation.state.params;
         //console.log(test);
-    }
 
-    componentWillMount() {
-        //console.log("componentWillMount - Friend");
         dummyData = global.users.map((data, index) => {
             if (data.isFriend === true) {
                 this.state.friends.push(data);
                 return data;
             }
-        })    
+        })  
     }
 
-    // componentDidMount() {
-    //     const { navigation } = this.props;
-    //     const test = navigation.state.params;
-    //     //console.log(test);
-    // }
+    componentWillMount() {
+        console.log("componentWillMount - Friend");
+        // dummyData = global.users.map((data, index) => {
+        //     if (data.isFriend === true) {
+        //         this.state.friends.push(data);
+        //         return data;
+        //     }
+        // })    
+    }
 
+    componentDidMount() {
+        console.log("componentDidMount - Friend");
+        //const { navigation } = this.props;
+        //const test = navigation.state.params;
+        //console.log(test);
+        // dummyData = global.users.map((data, index) => {
+        //     if (data.isFriend === true) {
+        //         this.state.friends.push(data);
+        //         return data;
+        //     }
+        // })    
+    }
 
-    render() {
+    componentDidUpdate() {
+        console.log("componentDidUpdate - Friend");
+        // const { navigation } = this.props;
+        // const test = navigation.state.params;
+        // if (test !== undefined) {
+        //     const { friends } = this.state;
+        //     if (test.work === 'update' && test.user.isMe === true) {
+        //         //console.log(test.user);
+        //         let n = friends.indexOf(test.user);
+        //         friends[n] = test.user;
+        //     } else if (test.work === 'add') { 
+                
+        //         if (test.user.isFriend === true) {
+        //             //console.log(test.user);
+        //             friends.push(test.user);
+        //         }
+        //     } else if (test.work === 'remove') {
+        //         //console.log(test.user);
+        //         let n = friends.indexOf(test.user);
+        //         friends.splice(n, 1);
+        //         //console.log(n);
+        //     }
+        // }
+      
+    }
 
-        const { navigation } = this.props;
-        const test = navigation.state.params;
-        if (test !== undefined) {
-            const { friends } = this.state;
-            if( test.isUpdating === true && test.user.isMe === true ) {
-                console.log(test.user);
-                let n = friends.indexOf(test.user);
-                friends[n] = test.user;
-            } else {
-                if(test.isFriend === true) {
-                    friends.push(test.user);
-                } else {
-                    let n = friends.indexOf(test.user);
-                    friends.splice(n,1);
-                    //console.log(n);
-                }
-            }                        
-        }
+    render() {      
 
         return (
             <View style={styles.container}>
@@ -85,7 +105,7 @@ class Friend extends Component {
                     data={this.state.friends}
                     renderItem={this.renderItem}
                     refreshing={this.state.refreshing}
-                    onRefresh={this.onRefresh.bind(this)}
+                    onRefresh={this.onRefresh}
                     extraData={this.state}
                     ListEmptyComponent={<EmptyListItem>{('NO_CONTENT')}</EmptyListItem>}
                 />
@@ -150,7 +170,7 @@ class Friend extends Component {
     }
 
     renderItem = ({ item, index }) => {
-        //console.log(item);
+        console.log(item.displayName);
         const listItem =
             <UserListItem
                 item={item}
@@ -162,11 +182,8 @@ class Friend extends Component {
 
     onItemClick = (item) => {
         //console.log(item);
-        this.props.navigation.navigate('Profile', { user: item });
-    }
-
-    deleteItem = (item) => {
-        this.setState();
+        const { friends } = this.state;
+        this.props.navigation.navigate('Profile', { user: item, friends: friends });
     }
 }
 export default Friend;
