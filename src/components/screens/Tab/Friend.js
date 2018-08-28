@@ -36,7 +36,7 @@ class Friend extends Component {
     }
 
     componentWillMount() {
-        console.log("componentWillMount - Friend");
+        //console.log("componentWillMount - Friend");
         // dummyData = global.users.map((data, index) => {
         //     if (data.isFriend === true) {
         //         this.state.friends.push(data);
@@ -46,7 +46,7 @@ class Friend extends Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount - Friend");
+        //console.log("componentDidMount - Friend");
         //const { navigation } = this.props;
         //const test = navigation.state.params;
         //console.log(test);
@@ -60,27 +60,18 @@ class Friend extends Component {
 
     componentDidUpdate() {
         console.log("componentDidUpdate - Friend");
-        // const { navigation } = this.props;
-        // const test = navigation.state.params;
-        // if (test !== undefined) {
-        //     const { friends } = this.state;
-        //     if (test.work === 'update' && test.user.isMe === true) {
-        //         //console.log(test.user);
-        //         let n = friends.indexOf(test.user);
-        //         friends[n] = test.user;
-        //     } else if (test.work === 'add') { 
-                
-        //         if (test.user.isFriend === true) {
-        //             //console.log(test.user);
-        //             friends.push(test.user);
-        //         }
-        //     } else if (test.work === 'remove') {
-        //         //console.log(test.user);
-        //         let n = friends.indexOf(test.user);
-        //         friends.splice(n, 1);
-        //         //console.log(n);
-        //     }
-        // }
+        const { navigation } = this.props;
+        const test = navigation.state.params;
+        
+        if (test !== undefined) {
+            const { friends } = this.state;
+            if (test.work === 'add') {                 
+                if (test.user.isFriend === true) {
+                    console.log(test.user);
+                    friends.push(test.user);
+                }
+            } 
+        }
       
     }
 
@@ -170,7 +161,7 @@ class Friend extends Component {
     }
 
     renderItem = ({ item, index }) => {
-        console.log(item.displayName);
+        //console.log(item.displayName);
         const listItem =
             <UserListItem
                 item={item}
@@ -180,9 +171,10 @@ class Friend extends Component {
         return listItem;
     }
 
-    onItemClick = (item) => {
-        //console.log(item);
+    onItemClick = (item) => {        
+        console.log("onItemClick");
         const { friends } = this.state;
+        //console.log(friends);
         this.props.navigation.navigate('Profile', { user: item, friends: friends });
     }
 }

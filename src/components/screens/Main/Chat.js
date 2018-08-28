@@ -10,7 +10,7 @@ import {
     Image,
     TextInput
 } from "react-native";
-
+import uuidv1 from "uuid/v1";
 import { IC_SMILE } from '../../../utils/Icons';
 import { colors } from '../../../utils/Styles';
 

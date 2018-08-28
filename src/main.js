@@ -21,7 +21,7 @@ export default class App extends Component {
             { uid: 3, img: IC_KimSK, displayName: '김성기', statusMsg: 'hello', isFriend: true, isMe: false },
             { uid: 4, img: IC_KimYH, displayName: '김윤희', statusMsg: 'hello', isFriend: true, isMe: false },
             { uid: 5, img: IC_LeeWG, displayName: '이원지', statusMsg: 'hello', isFriend: true, isMe: false },
-            { uid: 6, img: IC_LeeDY, displayName: '이동룡', statusMsg: 'hello', isFriend: false, isMe: false },
+            { uid: 6, img: IC_LeeDY, displayName: '이동용', statusMsg: 'hello', isFriend: false, isMe: false },
             { uid: 7, img: IC_JungIS, displayName: '정인수', statusMsg: 'hello', isFriend: false, isMe: false },
             { uid: 8, img: IC_JungJY, displayName: '정재윤', statusMsg: 'hello', isFriend: false, isMe: false },
             { uid: 9, img: IC_JungGH, displayName: '정규호', statusMsg: 'hello', isFriend: false, isMe: false },

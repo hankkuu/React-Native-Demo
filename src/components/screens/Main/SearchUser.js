@@ -18,7 +18,7 @@ import { IC_SEARCH } from '../../../utils/Icons';
 import GLOBAL from '../../../utils/global';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
-const gobalUsers = []; 
+const globalUsers = []; 
 
 class SearchUser extends Component {
     constructor(props) {
@@ -36,10 +36,15 @@ class SearchUser extends Component {
     
     componentDidMount() {
         //console.log('componentDidMount', 'SearchUser');
-         // 여기서 셋팅을 해줘야 하는데.... 
+        // 여기서 셋팅을 해줘야 하는데.... 
         //console.log(global.users);
-        gobalUsers = global.users;
-        this.setState({ users: global.users });
+        for(let u of global.users) {
+            if(u.isMe === false) {
+                globalUsers.push(u);
+            }
+        }
+       
+        this.setState({ users: globalUsers });
     }
     render() {
 
@@ -125,7 +130,8 @@ class SearchUser extends Component {
     }
 
     onItemClick = (item) => {
-        // console.log(item);
+        //console.log(users);
+        //console.log(item);
         this.props.navigation.navigate('Profile', { user: item });
     }
 

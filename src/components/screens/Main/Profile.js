@@ -23,9 +23,10 @@ class Profile extends Component {
         super(props);
 
         const { navigation } = props;
-        const { user, frieds } = navigation.state.params;
+        const { user, friends } = navigation.state.params;
 
-        console.log(frieds);
+        //console.log(friends);
+        //console.log(user);
 
         this.state = {
             isUpdating: false,
@@ -33,7 +34,7 @@ class Profile extends Component {
             statusMsg: user.statusMsg,
             img: user.img,
             isMe: user.isMe,  // 임시다.... 
-            thisFriends : frieds,
+            thisFriends : friends,
         }
     }
 
@@ -129,13 +130,15 @@ class Profile extends Component {
     onUpdate = () => {
         console.log('onUpdate');
         const { user } = this.props.navigation.state.params;
+       
         const { displayName, statusMsg } = this.state;
         this.setState({ isUpdating: true }, () => {
             try {
                 // 현재 업데이트 하려면......              
                 user.displayName = displayName;
                 user.statusMsg = statusMsg;
-                this.props.navigation.navigate("Friend", { user: user, work: 'update'});
+                //console.log(user);
+                this.props.navigation.navigate("Friend", { user: user });
             } catch (err) {
                 this.setState({ isUpdating: false });
             }
@@ -143,24 +146,25 @@ class Profile extends Component {
     }
 
     onAddFriend = () => {
-        const { data } = this.props.navigation.state.params;      
-        console.log(data); 
-        //console.log(friends);
+        const { user } = this.props.navigation.state.params;
+        //console.log(user); 
         //db_addfriend(user.uid);
         // isUpdating은 커스텀 버튼의 디자인 효과다...
         this.setState({isUpdating: true}, () => {
             user.isFriend = true;
-            this.props.navigation.navigate("Friend", { user: data, work: 'add' });
+            //thisFriends.push(user);
+            this.props.navigation.navigate("Friend", {user: user, work: 'add' });
         });        
     }
 
     onRemoveFriend = () => {
-        const { user } = this.props.navigation.state.params;
-        
+        const { user, friends } = this.props.navigation.state.params;
+        console.log(friends);
         //db_unfriend(user.uid);
         user.isFriend = false;
-        this.props.navigation.navigate("Friend", { user: user, work: 'remove' });
-        
+        let n = friends.indexOf(user);
+        friends.splice(n, 1);
+        this.props.navigation.navigate("Friend", { user: user });        
     }
 
     onChatFriend = () => {

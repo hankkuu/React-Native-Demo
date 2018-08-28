@@ -26,7 +26,7 @@ class UserListItem extends Component {
     }
 
     componentDidUpdate() {
-        console.log("componentDidUpdate - user List");
+        //console.log("componentDidUpdate - user List");
         //console.log(this.state.name);
     }
 
