@@ -161,32 +161,32 @@ class Chat extends Component {
         const { user } = this.props.navigation.state.params;
         const { Chat, msg } = this.state;
         console.log(msg);
-        if (msg !== "") {
-            console.log(msg);
-            console.log(Chat);
-            this.setState(prevState => {
-                const ID = uuidv1();
-                const newObject = {
-                    [ID]: {
-                        id: ID,
-                        sender: user.displayName,
-                        img: user.img,
-                        message: msg,
-                        date: new Date(),
-                        isPeer: true,
-                    }
-                }
-                const newState = {
-                    ...prevState,
-                    msg: '',
-                    Chat: {
-                        ...prevState.Chat,
-                        ...newObject
-                    }
-                }
-                return { ...newState }
-            });
-        }
+        // if (msg !== "") {
+        //     console.log(msg);
+        //     console.log(Chat);
+        //     this.setState(prevState => {
+        //         const ID = uuidv1();
+        //         const newObject = {
+        //             [ID]: {
+        //                 id: ID,
+        //                 sender: user.displayName,
+        //                 img: user.img,
+        //                 message: msg,
+        //                 date: new Date(),
+        //                 isPeer: true,
+        //             }
+        //         }
+        //         const newState = {
+        //             ...prevState,
+        //             msg: '',
+        //             Chat: {
+        //                 ...prevState.Chat,
+        //                 ...newObject
+        //             }
+        //         }
+        //         return { ...newState }
+        //     });
+        // }
     }
 
     showMenu = () => {

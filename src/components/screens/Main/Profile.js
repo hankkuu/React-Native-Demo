@@ -129,16 +129,27 @@ class Profile extends Component {
 
     onUpdate = () => {
         console.log('onUpdate');
-        const { user } = this.props.navigation.state.params;
+        const { user, friends } = this.props.navigation.state.params;
        
         const { displayName, statusMsg } = this.state;
         this.setState({ isUpdating: true }, () => {
             try {
                 // 현재 업데이트 하려면......              
-                user.displayName = displayName;
-                user.statusMsg = statusMsg;
+                //user.displayName = displayName;
+                //user.statusMsg = statusMsg;
+                //console.log(friends);
+                for(let u of friends) {
+                    //console.log(u.displayName);
+                    //console.log(displayName);
+                    if( u.displayName.includes(user.displayName) == true) {
+                        //console.log(u);
+                        u.displayName = displayName;
+                        u.statusMsg = statusMsg;
+                        console.log(u);
+                    }
+                }
                 //console.log(user);
-                this.props.navigation.navigate("Friend", { user: user });
+                this.props.navigation.navigate("Friend", {});  // 뭔가보내야만 한다는 이유를 모르겠다... 
             } catch (err) {
                 this.setState({ isUpdating: false });
             }

@@ -153,9 +153,11 @@ class SearchUser extends Component {
         if (searchTxt === '') {
             //console.log("전체가 보여야 한다"); // 임시로 전체를 이렇게 가져와야 할것 같다.. state 배열이 비어 있다.
             // 아래에서 상태를변경시켜 놔서 맨 처음것으로 다시 덮어써야 한다 
-            this.setState({ users: gobalUsers });
+            this.setState({ users: globalUsers });
         } else {
-            this.setState({ users: users.filter((item) => item.displayName.includes(this.state.searchTxt)) });
+            this.setState({ users: users.filter((item) => 
+                item.displayName.includes(this.state.searchTxt)
+            ) });
         }
     }
 

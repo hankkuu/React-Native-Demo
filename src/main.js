@@ -15,9 +15,9 @@ export default class App extends Component {
         super();
 
         global.users = [
-            { uid: 0, img: IC_KangHG, displayName: '강한규', statusMsg: 'hello', isFriend: true, isMe: true },
-            { uid: 1, img: IC_IMHG, displayName: '임형관', statusMsg: 'hello', isFriend: true, isMe: false },
-            { uid: 2, img: IC_JungDM, displayName: '정동민', statusMsg: 'hello', isFriend: true, isMe: false },
+            { uid: 0, img: IC_KangHG, displayName: 'a', statusMsg: 'hello', isFriend: true, isMe: true },
+            { uid: 1, img: IC_IMHG, displayName: '1', statusMsg: 'hello', isFriend: true, isMe: false },
+            { uid: 2, img: IC_JungDM, displayName: 'a', statusMsg: 'hello', isFriend: true, isMe: false },
             { uid: 3, img: IC_KimSK, displayName: '김성기', statusMsg: 'hello', isFriend: true, isMe: false },
             { uid: 4, img: IC_KimYH, displayName: '김윤희', statusMsg: 'hello', isFriend: true, isMe: false },
             { uid: 5, img: IC_LeeWG, displayName: '이원지', statusMsg: 'hello', isFriend: true, isMe: false },
